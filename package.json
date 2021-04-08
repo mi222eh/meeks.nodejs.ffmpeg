@@ -1,0 +1,23 @@
+{
+  "name": "ffmpeg-js-dal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mi222eh@bitbucket.org/mi222eh/ffmpeg-js-dal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mi222eh/ffmpeg-js-dal#readme",
+  "dependencies": {
+    "fs-extra": "^9.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.2"
+  }
+}
