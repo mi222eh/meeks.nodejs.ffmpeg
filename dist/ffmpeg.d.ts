@@ -5,7 +5,7 @@ export declare class FFMPEG {
     process: ChildProcess;
     promise: Promise<void>;
     constructor();
-    stop(): void;
+    stop(): Promise<void>;
     addCommand(command: string[] | string): this;
     execute(): void;
 }

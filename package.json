@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "test": "node test/cancel.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
     "axios": "^0.21.0",
     "command-exists": "^1.2.9",
     "fs-extra": "^9.0.1",
+    "is-windows": "^1.0.2",
+    "meeks.nodejs.process.terminator": "git+https://gitlab.com/micke.shi/meeks.nodejs.process.terminator.git",
+    "terminate": "^2.2.1",
     "tslib": "^2.0.3"
   },
   "devDependencies": {
