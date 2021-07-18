@@ -4,7 +4,7 @@ import { ChildProcess } from "node:child_process";
 import terminate from "terminate";
 import node_process from "process";
 import is_windows from "is-windows";
-import processTerminator from "meeks.nodejs.process.terminator";
+import { KillProcess } from "meeks.nodejs.process.terminator";
 
 export class FFMPEG {
     private commands: string[] = [];
@@ -12,7 +12,7 @@ export class FFMPEG {
     promise: Promise<void>;
     constructor() {}
     stop() {
-        return processTerminator.KillProcess(this.process.pid);
+        return KillProcess(this.process.pid);
     }
     addCommand(command: string[] | string) {
         if (typeof command === "string") {

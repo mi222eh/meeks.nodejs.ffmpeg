@@ -1,6 +1,6 @@
 {
   "name": "ffmpeg-js-dal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b",
