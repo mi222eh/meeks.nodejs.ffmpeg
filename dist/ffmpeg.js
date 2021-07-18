@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FFMPEG = void 0;
 const tslib_1 = require("tslib");
 const child_process_1 = tslib_1.__importDefault(require("child_process"));
-const meeks_nodejs_process_terminator_1 = tslib_1.__importDefault(require("meeks.nodejs.process.terminator"));
+const meeks_nodejs_process_terminator_1 = require("meeks.nodejs.process.terminator");
 class FFMPEG {
     constructor() {
         this.commands = [];
     }
     stop() {
-        return meeks_nodejs_process_terminator_1.default.KillProcess(this.process.pid);
+        return meeks_nodejs_process_terminator_1.KillProcess(this.process.pid);
     }
     addCommand(command) {
         if (typeof command === "string") {
