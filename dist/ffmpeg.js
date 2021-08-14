@@ -7,6 +7,8 @@ const meeks_nodejs_process_terminator_1 = require("meeks.nodejs.process.terminat
 class FFMPEG {
     constructor() {
         this.commands = [];
+        this.mode = "ffmpeg";
+        this.output = "";
     }
     stop() {
         return meeks_nodejs_process_terminator_1.KillProcess(this.process.pid);
@@ -20,12 +22,15 @@ class FFMPEG {
     }
     execute() {
         const commandArgsString = [...this.commands].join(" ");
-        const commandFile = "ffmpeg";
+        const commandFile = this.mode;
         const command = `${commandFile} ${commandArgsString}`;
         console.log("executing command");
         console.log(command);
         this.process = child_process_1.default.spawn(command, {
             shell: true,
+        });
+        this.process.stdout.on("data", (chunk) => {
+            this.output += chunk.toString();
         });
         this.process.stderr.on("data", (data) => {
             console.error(data.toString());
@@ -35,13 +40,16 @@ class FFMPEG {
                 console.log("CLOSES");
                 console.log(code, signal);
                 if (code === 0) {
-                    resolve();
+                    resolve(void 0);
                 }
                 else {
                     reject(code);
                 }
             });
         });
+    }
+    getData() {
+        return JSON.parse(this.output);
     }
 }
 exports.FFMPEG = FFMPEG;

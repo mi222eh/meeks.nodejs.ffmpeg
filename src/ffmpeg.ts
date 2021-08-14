@@ -5,9 +5,12 @@ import terminate from "terminate";
 import node_process from "process";
 import is_windows from "is-windows";
 import { KillProcess } from "meeks.nodejs.process.terminator";
+import { MediaFile } from "./types/Mediafile";
 
-export class FFMPEG {
+export class FFMPEG<T = void> {
     private commands: string[] = [];
+    mode: "ffmpeg" | "ffprobe" = "ffmpeg";
+    output = "";
     process: ChildProcess;
     promise: Promise<void>;
     constructor() {}
@@ -23,27 +26,33 @@ export class FFMPEG {
     }
     execute() {
         const commandArgsString = [...this.commands].join(" ");
-        const commandFile = "ffmpeg";
+        const commandFile = this.mode;
         const command = `${commandFile} ${commandArgsString}`;
         console.log("executing command");
         console.log(command);
         this.process = Process.spawn(command, {
             shell: true,
         });
+        this.process.stdout.on("data", (chunk) => {
+            this.output += chunk.toString();
+        });
         this.process.stderr.on("data", (data) => {
             console.error(data.toString());
         });
 
-        this.promise = new Promise((resolve, reject) => {
+        this.promise = new Promise<void>((resolve, reject) => {
             this.process.on("close", (code, signal) => {
                 console.log("CLOSES");
                 console.log(code, signal);
                 if (code === 0) {
-                    resolve();
+                    resolve(void 0);
                 } else {
                     reject(code);
                 }
             });
         });
+    }
+    getData() {
+        return JSON.parse(this.output) as T;
     }
 }
