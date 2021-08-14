@@ -11,6 +11,7 @@ export class FFMPEG<T = void> {
     private commands: string[] = [];
     mode: "ffmpeg" | "ffprobe" = "ffmpeg";
     output = "";
+    errorOutput = "";
     process: ChildProcess;
     promise: Promise<void>;
     constructor() {}
@@ -37,9 +38,13 @@ export class FFMPEG<T = void> {
             this.output += chunk.toString();
         });
         this.process.stderr.on("data", (data) => {
+            this.errorOutput += data.toString();
             console.error(data.toString());
         });
 
+        this.process.on("error", (error) => {
+            this.errorOutput = error.message;
+        });
         this.promise = new Promise<void>((resolve, reject) => {
             this.process.on("close", (code, signal) => {
                 console.log("CLOSES");
@@ -47,7 +52,12 @@ export class FFMPEG<T = void> {
                 if (code === 0) {
                     resolve(void 0);
                 } else {
-                    reject(code);
+                    reject(
+                        new Error(
+                            `Exited with code: ${code}
+                    ${this.errorOutput}`
+                        )
+                    );
                 }
             });
         });

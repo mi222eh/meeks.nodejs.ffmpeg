@@ -22,13 +22,19 @@ export function createCombineProcess(srcList: string[], output: string) {
 
 export function getMediaInfoFromFile(path: string) {
     const ffmpeg = new FFMPEG<MediaFile>();
+
     ffmpeg.addCommand([
-        "-v",
-        "quiet",
-        "-print_format",
-        "json",
+        "-hide_banner",
+        "-loglevel",
+        "fatal",
+        "-show_error",
         "-show_format",
         "-show_streams",
+        "-show_programs",
+        "-show_chapters",
+        "-show_private_data",
+        "-print_format",
+        "json",
         path,
     ]);
     ffmpeg.mode = "ffprobe";

@@ -4,6 +4,7 @@ export declare class FFMPEG<T = void> {
     private commands;
     mode: "ffmpeg" | "ffprobe";
     output: string;
+    errorOutput: string;
     process: ChildProcess;
     promise: Promise<void>;
     constructor();

@@ -9,6 +9,7 @@ class FFMPEG {
         this.commands = [];
         this.mode = "ffmpeg";
         this.output = "";
+        this.errorOutput = "";
     }
     stop() {
         return meeks_nodejs_process_terminator_1.KillProcess(this.process.pid);
@@ -33,7 +34,11 @@ class FFMPEG {
             this.output += chunk.toString();
         });
         this.process.stderr.on("data", (data) => {
+            this.errorOutput += data.toString();
             console.error(data.toString());
+        });
+        this.process.on("error", (error) => {
+            this.errorOutput = error.message;
         });
         this.promise = new Promise((resolve, reject) => {
             this.process.on("close", (code, signal) => {
@@ -43,7 +48,8 @@ class FFMPEG {
                     resolve(void 0);
                 }
                 else {
-                    reject(code);
+                    reject(new Error(`Exited with code: ${code}
+                    ${this.errorOutput}`));
                 }
             });
         });
