@@ -1,6 +1,3 @@
-import Process from "child_process";
-
-import { ChildProcess } from "node:child_process";
 import { FFMPEG } from "./ffmpeg";
 import { MediaFile } from "./types/Mediafile";
 

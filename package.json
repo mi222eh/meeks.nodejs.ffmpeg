@@ -19,13 +19,12 @@
     "command-exists": "^1.2.9",
     "fs-extra": "^9.0.1",
     "is-windows": "^1.0.2",
-    "meeks.nodejs.ffmpeg": "https://github.com/mi222eh/meeks.nodejs.ffmpeg/tarball/master",
     "meeks.nodejs.process.terminator": "https://github.com/mi222eh/meeks.nodejs.process.terminator/tarball/master",
     "terminate": "^2.2.1",
     "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.17.9",
     "typescript": "^4.2.4"
   },
   "description": ""

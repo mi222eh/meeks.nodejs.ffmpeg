@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { ChildProcess } from "node:child_process";
+import { ChildProcess } from "child_process";
 export declare class FFMPEG<T = void> {
     private commands;
     mode: "ffmpeg" | "ffprobe";

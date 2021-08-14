@@ -1,11 +1,7 @@
 import Process from "child_process";
 
-import { ChildProcess } from "node:child_process";
-import terminate from "terminate";
-import node_process from "process";
-import is_windows from "is-windows";
+import { ChildProcess } from "child_process";
 import { KillProcess } from "meeks.nodejs.process.terminator";
-import { MediaFile } from "./types/Mediafile";
 
 export class FFMPEG<T = void> {
     private commands: string[] = [];
